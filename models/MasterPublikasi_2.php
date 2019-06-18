@@ -4,6 +4,7 @@ namespace app\models;
 
 use Yii;
 
+
 /**
  * This is the model class for table "master_publikasi".
  *
@@ -15,15 +16,12 @@ use Yii;
  * @property string $tgl_periksa_ipds
  * @property string $id_penyusun
  * @property int $tahun
- *
- * @property MasterPegawai $penyusun
  */
 class MasterPublikasi extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
-
 
     public static function tableName()
     {
@@ -35,6 +33,7 @@ class MasterPublikasi extends \yii\db\ActiveRecord
      */
     public function rules()
     {
+      $pegawai=MasterPegawai();
         return [
             [['id_publikasi', 'nama_publikasi', 'tgl_upload', 'tgl_rilis', 'tgl_periksa_bidang', 'tgl_periksa_ipds', 'id_penyusun', 'tahun'], 'required'],
             [['id_publikasi', 'tahun'], 'integer'],
@@ -42,7 +41,6 @@ class MasterPublikasi extends \yii\db\ActiveRecord
             [['nama_publikasi'], 'string', 'max' => 200],
             [['id_penyusun'], 'string', 'max' => 9],
             [['id_publikasi'], 'unique'],
-            [['id_penyusun'], 'exist', 'skipOnError' => true, 'targetClass' => MasterPegawai::className(), 'targetAttribute' => ['id_penyusun' => 'niplama']],
         ];
     }
 
@@ -58,24 +56,15 @@ class MasterPublikasi extends \yii\db\ActiveRecord
             'tgl_rilis' => 'Tgl Rilis',
             'tgl_periksa_bidang' => 'Tgl Periksa Bidang',
             'tgl_periksa_ipds' => 'Tgl Periksa Ipds',
-            'id_penyusun' => 'Penyusun Publikasi',
+            'id_penyusun' => 'Id Penyusun',
             'tahun' => 'Tahun',
         ];
     }
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getPenyusun()
-    {
-        return $this->hasOne(MasterPegawai::className(), ['niplama' => 'id_penyusun']);
+    public function getPegawai(){
+
+        $customer = Customer::find()
+            ->where(['id' => 123])
+            ->one();
     }
-
-    public function getPenyusunPublikasi($id)
-    {
-        $customer = Customer::findOne($di);
-        return $customer;
-    }
-
-
 }

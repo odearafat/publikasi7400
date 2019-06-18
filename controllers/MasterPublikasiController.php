@@ -4,12 +4,14 @@ namespace app\controllers;
 
 use Yii;
 use app\models\MasterPublikasi;
+use app\models\MasterPegawai;
 use app\models\TransaksiPublikasi;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\helpers\Url;
+use yii\helpers\ArrayHelper;
 
 /**
  * MasterPublikasiController implements the CRUD actions for MasterPublikasi model.
@@ -54,9 +56,15 @@ class MasterPublikasiController extends Controller
      */
     public function actionView($id)
     {
+        $model=MasterPublikasi::findOne($id);
+        $namaPegawai=MasterPegawai::findOne($model->id_penyusun);
+        //$namaPegawai=$model->nama;
+
+
         return $this->render('view', [
             'model' => $this->findModel($id),
-        ]);
+            'nama_pegawai'=>$namaPegawai->nama,
+       ]);
     }
 
 
@@ -93,7 +101,8 @@ class MasterPublikasiController extends Controller
             return $this->redirect(['view', 'id' => $model->id_publikasi]);
         }
 
-        return $this->render('update', [
+        return $this->render('update',
+        [
             'model' => $model,
         ]);
     }
@@ -119,6 +128,7 @@ class MasterPublikasiController extends Controller
      * @return MasterPublikasi the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
+
     protected function findModel($id)
     {
         if (($model = MasterPublikasi::findOne($id)) !== null) {
