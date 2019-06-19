@@ -8,7 +8,7 @@
                 <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="img-circle" alt="User Image"/>
             </div>
             <div class="pull-left info">
-                <p>Alexander Pierce</p>
+                <p></p>
 
                 <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
@@ -30,12 +30,24 @@
             [
                 'options' => ['class' => 'sidebar-menu tree', 'data-widget'=> 'tree'],
                 'items' => [
-                    ['label' => 'Menu Yii2', 'options' => ['class' => 'header']],
-                  //  ['label' => 'Gii', 'icon' => 'file-code-o', 'url' => ['/gii']],
+                    ['label' => 'MENU', 'options' => ['class' => 'header']],
+                    // ['label' => 'Gii', 'icon' => 'file-code-o', 'url' => ['/gii']],
                     //['label' => 'Debug', 'icon' => 'dashboard', 'url' => ['/debug']],
                     //['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
-                    ['label' => 'Publikasi', 'icon' => 'dashboard', 'url' => ['/master-publikasi/index']],
-                    ['label' => 'Daftar Cetak', 'icon' => 'dashboard', 'url' => ['/debug']],
+                    ['label' => 'PUBLIKASI', 'icon' => 'dashboard', 'url' => ['/master-publikasi/index'],
+                      'items' => [
+                          ['label' => 'Publikasi ARC', 'icon' => ' fa-calendar-check-o', 'url' => ['/master-publikasi/index'],],
+                          ['label' => 'Publikasi NON ARC', 'icon' => ' fa-book', 'url' => ['#'],],
+                          ['label' => 'Status Publikasi', 'icon' => ' fa-question', 'url' => ['#'],],
+                      ]
+                    ],
+
+                    ['label' => 'ADMINISTRASI', 'icon' => 'dashboard', 'url' => ['/debug'],
+                      'items' => [
+                          ['label' => 'Publikasi Siap Cetak', 'icon' => 'file-code-o', 'url' => ['/gii'],],
+                          ['label' => 'Distribusi Publikasi', 'icon' => 'dashboard', 'url' => ['/debug'],],
+                      ]
+                  ],
                     /*[
                         'label' => 'Some tools',
                         'icon' => 'share',

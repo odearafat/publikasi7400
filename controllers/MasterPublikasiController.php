@@ -12,6 +12,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\helpers\Url;
 use yii\helpers\ArrayHelper;
+use yii\filters\AccessControl;
 
 /**
  * MasterPublikasiController implements the CRUD actions for MasterPublikasi model.
@@ -30,7 +31,30 @@ class MasterPublikasiController extends Controller
                     'delete' => ['POST'],
                 ],
             ],
+
+            'access'=>[
+               'class'=>AccessControl::className(),
+               'rules'=>[
+                   [
+                       'actions'=>[
+                           'index',
+                           'create',
+                           'update',
+                           'delete',
+                           'view'
+                       ],
+                       'allow'=>true,
+                       'matchCallback'=>function(){
+                           return (
+                               Yii::$app->user->identity->role=='Admin'
+                           );
+                       }
+                   ],
+               ],
+           ],
         ];
+
+
     }
 
     /**
@@ -54,19 +78,32 @@ class MasterPublikasiController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
+
     public function actionView($id)
     {
         $model=MasterPublikasi::findOne($id);
         $namaPegawai=MasterPegawai::findOne($model->id_penyusun);
         //$namaPegawai=$model->nama;
-
+        //$this->
 
         return $this->render('view', [
             'model' => $this->findModel($id),
-            'nama_pegawai'=>$namaPegawai->nama,
+            'namaPegawai'=>$namaPegawai->nama
        ]);
     }
 
+    public function actionHistori($id)
+    {
+        $model=MasterPublikasi::findOne($id);
+        $namaPegawai=MasterPegawai::findOne($model->id_penyusun);
+        //$namaPegawai=$model->nama;
+        //$this->
+
+        return $this->render('view-histori', [
+            'model' => $this->findModel($id),
+            'namaPegawai'=>$namaPegawai->nama
+       ]);
+    }
 
     /**
      * Creates a new MasterPublikasi model.
@@ -75,15 +112,15 @@ class MasterPublikasiController extends Controller
      */
     public function actionCreate()
     {
-        $model = new MasterPublikasi();
+      $model = new MasterPublikasi();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id_publikasi]);
-        }
+      if ($model->load(Yii::$app->request->post()) && $model->save()) {
+          return $this->redirect(['view', 'id' => $model->id_publikasi]);
+      }
 
-        return $this->render('create', [
-            'model' => $model,
-        ]);
+      return $this->render('create', [
+          'model' => $model,
+      ]);
     }
 
     /**

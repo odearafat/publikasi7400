@@ -36,7 +36,15 @@ $this->params['breadcrumbs'][] = $this->title;
             'tgl_rilis',
             'tgl_periksa_bidang',
             'tgl_periksa_ipds',
-            'id_penyusun',
+            'penyusun.nama',
+            //'id_penyusun',
+            //[                                                  // the owner name of the model
+              //'label' => 'Penyusun Publikasi',
+              //'value' => 'function ($model, $key, $index, $grid){
+               //return $model->penyusun->nama;}'
+              //'contentOptions' => ['class' => 'bg-red'],     // HTML attributes to customize value tag
+              //'captionOptions' => ['tooltip' => 'Tooltip'],  // HTML attributes to customize label tag
+            //],
             'tahun',
         ],
     ]) ?>

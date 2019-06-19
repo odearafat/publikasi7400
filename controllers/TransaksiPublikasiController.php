@@ -92,7 +92,13 @@ class TransaksiPublikasiController extends Controller
            }
 
                $model->save();
-               return $this->redirect(['view', 'id' => $model->id_transaksi]);
+               $searchModel = new TransaksiSearch();
+               $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+               return $this->render('index', [
+                   'searchModel' => $searchModel,
+                   'dataProvider' => $dataProvider,
+                 ]);
           } else {
             /*$model->file_address = UploadedFile::getInstance($model, 'file_address');
             if ($model->upload()) {
@@ -110,11 +116,11 @@ class TransaksiPublikasiController extends Controller
 
     }
 
-    public function beforeAction($action)
-{
-    $this->enableCsrfValidation = true;
-    return parent::beforeAction($action);
-}
+      public function beforeAction($action)
+      {
+          $this->enableCsrfValidation = true;
+          return parent::beforeAction($action);
+      }
 
     /**
      * Updates an existing TransaksiPublikasi model.

@@ -14,8 +14,10 @@ use Yii;
  * @property string $tgl_periksa_bidang
  * @property string $tgl_periksa_ipds
  * @property string $id_penyusun
+ * @property string $id_bidang
  * @property int $tahun
  *
+ * @property MasterBidang $bidang
  * @property MasterPegawai $penyusun
  */
 class MasterPublikasi extends \yii\db\ActiveRecord
@@ -23,8 +25,6 @@ class MasterPublikasi extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
-
-
     public static function tableName()
     {
         return 'master_publikasi';
@@ -36,12 +36,13 @@ class MasterPublikasi extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_publikasi', 'nama_publikasi', 'tgl_upload', 'tgl_rilis', 'tgl_periksa_bidang', 'tgl_periksa_ipds', 'id_penyusun', 'tahun'], 'required'],
-            [['id_publikasi', 'tahun'], 'integer'],
+            [['nama_publikasi', 'tgl_upload', 'tgl_rilis', 'tgl_periksa_bidang', 'tgl_periksa_ipds', 'id_penyusun', 'id_bidang', 'tahun'], 'required'],
             [['tgl_upload', 'tgl_rilis', 'tgl_periksa_bidang', 'tgl_periksa_ipds'], 'safe'],
+            [['tahun'], 'integer'],
             [['nama_publikasi'], 'string', 'max' => 200],
             [['id_penyusun'], 'string', 'max' => 9],
-            [['id_publikasi'], 'unique'],
+            [['id_bidang'], 'string', 'max' => 2],
+            [['id_bidang'], 'exist', 'skipOnError' => true, 'targetClass' => MasterBidang::className(), 'targetAttribute' => ['id_bidang' => 'id_bidang']],
             [['id_penyusun'], 'exist', 'skipOnError' => true, 'targetClass' => MasterPegawai::className(), 'targetAttribute' => ['id_penyusun' => 'niplama']],
         ];
     }
@@ -52,15 +53,24 @@ class MasterPublikasi extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id_publikasi' => 'Id Publikasi',
-            'nama_publikasi' => 'Nama Publikasi',
-            'tgl_upload' => 'Tgl Upload',
-            'tgl_rilis' => 'Tgl Rilis',
-            'tgl_periksa_bidang' => 'Tgl Periksa Bidang',
-            'tgl_periksa_ipds' => 'Tgl Periksa Ipds',
-            'id_penyusun' => 'Penyusun Publikasi',
-            'tahun' => 'Tahun',
+          'id_publikasi' => 'Id Publikasi',
+          'nama_publikasi' => 'Nama Publikasi',
+          'tgl_upload' => 'Tanggal Upload',
+          'tgl_rilis' => 'Tanggal Rilis',
+          'tgl_periksa_bidang' => 'Tanggal Periksa Bidang',
+          'tgl_periksa_ipds' => 'Tanggal Periksa IPDS',
+          'id_penyusun' => 'Penyusun Publikasi',
+          'penyusun.nama'=>'Penyusun Publikasi',
+          'tahun' => 'Tahun',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getBidang()
+    {
+        return $this->hasOne(MasterBidang::className(), ['id_bidang' => 'id_bidang']);
     }
 
     /**
@@ -70,12 +80,4 @@ class MasterPublikasi extends \yii\db\ActiveRecord
     {
         return $this->hasOne(MasterPegawai::className(), ['niplama' => 'id_penyusun']);
     }
-
-    public function getPenyusunPublikasi($id)
-    {
-        $customer = Customer::findOne($di);
-        return $customer;
-    }
-
-
 }

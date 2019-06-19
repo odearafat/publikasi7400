@@ -7,14 +7,12 @@ use Yii;
 /**
  * This is the model class for table "login".
  *
- * @property string $id
+ * @property int $id
  * @property string $username
  * @property string $password
  * @property string $authKey
  * @property string $accessToken
  * @property string $role
- *
- * @property MasterPegawai $id0
  */
 class Login extends \yii\db\ActiveRecord
 {
@@ -32,13 +30,9 @@ class Login extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id'], 'required'],
-            [['id'], 'string', 'max' => 9],
             [['username'], 'string', 'max' => 30],
             [['password', 'authKey', 'accessToken'], 'string', 'max' => 50],
             [['role'], 'string', 'max' => 10],
-            [['id'], 'unique'],
-            [['id'], 'exist', 'skipOnError' => true, 'targetClass' => MasterPegawai::className(), 'targetAttribute' => ['id' => 'niplama']],
         ];
     }
 
@@ -55,13 +49,5 @@ class Login extends \yii\db\ActiveRecord
             'accessToken' => 'Access Token',
             'role' => 'Role',
         ];
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getId0()
-    {
-        return $this->hasOne(MasterPegawai::className(), ['niplama' => 'id']);
     }
 }

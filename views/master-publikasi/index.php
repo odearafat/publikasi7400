@@ -30,15 +30,15 @@ $this->params['breadcrumbs'][] = $this->title;
             'tgl_upload',
             'tgl_rilis',
             'tgl_periksa_bidang',
-            //'tgl_periksa_ipds',
-            //'id_penyusun',
+            'tgl_periksa_ipds',
+            'penyusun.nama',
             //'tahun',
 
            //['class' => 'yii\grid\ActionColumn'],
 
            [
             'class' => 'yii\grid\ActionColumn',
-            'template' => '{view} {update} {delete} {link}',
+            'template' => '{view} {update} {delete} {link}{histori}',
             'buttons' => [
                 'link' => function ($url,$model,$key) {
                   $a=Url::to(['transaksi-publikasi/create', 'id'=>$model->id_publikasi]);
@@ -46,6 +46,13 @@ $this->params['breadcrumbs'][] = $this->title;
                            '<span class="glyphicon glyphicon-upload"></span>',
                            $a);
                 },
+                'histori' => function ($url,$model,$key) {
+                  $a=Url::to(['master-publikasi/histori', 'id'=>$model->id_publikasi]);
+                  return Html::a(
+                           '<i class="fa fa-history"></i>',
+                           $a);
+                },
+
 	        ],
         ],
 

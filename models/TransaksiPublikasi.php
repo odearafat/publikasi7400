@@ -33,7 +33,7 @@ class TransaksiPublikasi extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            //[['id_transaksi', 'jenis_transaksi', 'file_address', 'catatan', 'niplama', 'id_publikasi'], 'required'],
+            [['file_address', 'catatan'], 'required'],
             [['id_transaksi', 'jenis_transaksi', 'id_publikasi'], 'integer'],
             [['catatan'], 'string'],
             //[['time_transaksi'], 'safe'],

@@ -21,7 +21,8 @@
         "dmstr/yii2-adminlte-asset": "^2.1",
         "2amigos/yii2-date-picker-widget": "~1.0",
         "kartik-v/yii2-detail-view": "dev-master",
-        "kartik-v/yii2-widget-datepicker": "@dev"
+        "kartik-v/yii2-widget-datepicker": "@dev",
+        "et-soft/yii2-widget-select-year": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",

@@ -19,16 +19,16 @@ use yii\helpers\ArrayHelper;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?php //$form->field($model, 'id_publikasi')->textInput() ?>
+    <?php //echo $form->field($model, 'id_publikasi')->textInput() ?>
 
     <?= $form->field($model, 'nama_publikasi')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'tgl_upload')->widget(DatePicker::classname(), [
-        'options' => ['placeholder' => 'Tanggal Upload....'],
-        'pluginOptions' => [
-            'autoclose'=>true,
-            'format' => 'yyyy-mm-dd'
-        ]
+          'options' => ['placeholder' => 'Tanggal Upload....'],
+          'pluginOptions' => [
+              'autoclose'=>true,
+              'format' => 'yyyy-mm-dd'
+          ]
         ]);
     ?>
 
@@ -63,7 +63,9 @@ use yii\helpers\ArrayHelper;
           ArrayHelper::map(MasterPegawai::find()->all(),'niplama','nama'),
             ['prompt'=>'Pilih User']) ?>
 
-    <?= $form->field($model, 'tahun')->textInput() ?>
+    <?= $form->field($model, 'tahun')->widget(etsoft\widgets\YearSelectbox::classname(), [
+                'yearStart' => 2,
+                'yearEnd' => -10,]); ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

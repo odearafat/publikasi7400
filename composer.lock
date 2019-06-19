@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "48013f3b8c49317cd1cfb099209f7649",
+    "content-hash": "9cfac9ee0f9ce3dfdb7cf0072761a940",
     "packages": [
         {
             "name": "2amigos/yii2-date-picker-widget",
@@ -506,6 +506,46 @@
                 "validator"
             ],
             "time": "2019-05-16T22:02:54+00:00"
+        },
+        {
+            "name": "et-soft/yii2-widget-select-year",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/et-soft/yii2-widget-select-year.git",
+                "reference": "10210cf42b9e79ae14d053f10b5de2a6432ab473"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/et-soft/yii2-widget-select-year/zipball/10210cf42b9e79ae14d053f10b5de2a6432ab473",
+                "reference": "10210cf42b9e79ae14d053f10b5de2a6432ab473",
+                "shasum": ""
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "etsoft\\widgets\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD 3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Evgeny Titov",
+                    "email": "etsoft2015@gmail.com"
+                }
+            ],
+            "description": "Widget for Yii2, created selectbox field with years",
+            "homepage": "https://github.com/et-soft/yii2-widget-select-year",
+            "keywords": [
+                "extension",
+                "form",
+                "widget",
+                "yii2"
+            ],
+            "time": "2015-08-02T07:05:19+00:00"
         },
         {
             "name": "ezyang/htmlpurifier",

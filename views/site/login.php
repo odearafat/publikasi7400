@@ -20,12 +20,13 @@ $fieldOptions2 = [
 ?>
 
 <div class="login-box">
-    <div class="login-logo">
-        <a href="#"><b>Admin</b>LTE</a>
-    </div>
+
     <!-- /.login-logo -->
     <div class="login-box-body">
-        <p class="login-box-msg">Sign in to start your session</p>
+      <div class="login-logo">
+          <a href="#"><b>MANAJEMEN</b>publikasi</a>
+      </div>
+        <!--<p class="login-box-msg">LOGIN</p>-->
 
         <?php $form = ActiveForm::begin(['id' => 'login-form', 'enableClientValidation' => false]); ?>
 
@@ -53,6 +54,7 @@ $fieldOptions2 = [
 
         <?php ActiveForm::end(); ?>
 
+        <!--
         <div class="social-auth-links text-center">
             <p>- OR -</p>
             <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> Sign in
