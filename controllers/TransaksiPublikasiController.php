@@ -78,7 +78,7 @@ class TransaksiPublikasiController extends Controller
 
           //echo 'dsada'; exit();
            $file_address = UploadedFile::getInstance($model, 'file_address');
-           if($model->validate()){
+           //if($model->validate()){
              //echo 'test'; exit();
                $model->save();
                 if (!empty($file_address)) {
@@ -89,7 +89,7 @@ class TransaksiPublikasiController extends Controller
                     $model->niplama=Yii::$app->user->identity->id;;
                     $model->save(FALSE);
                }
-           }
+
 
                $model->save();
                $searchModel = new TransaksiSearch();
@@ -99,6 +99,15 @@ class TransaksiPublikasiController extends Controller
                    'searchModel' => $searchModel,
                    'dataProvider' => $dataProvider,
                  ]);
+              /*}else{
+                echo 'gagal';
+                $searchModel = new TransaksiSearch();
+                $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+                return $this->render('index', [
+                    'searchModel' => $searchModel,
+                    'dataProvider' => $dataProvider,
+                  ]);
+              }*/
           } else {
             /*$model->file_address = UploadedFile::getInstance($model, 'file_address');
             if ($model->upload()) {
@@ -116,12 +125,12 @@ class TransaksiPublikasiController extends Controller
 
     }
 
-      public function beforeAction($action)
+    /*  public function beforeAction($action)
       {
           $this->enableCsrfValidation = true;
           return parent::beforeAction($action);
       }
-
+*/
     /**
      * Updates an existing TransaksiPublikasi model.
      * If update is successful, the browser will be redirected to the 'view' page.

@@ -67,7 +67,7 @@ class TransaksiPublikasi extends \yii\db\ActiveRecord
           //  'jenis_transaksi' => 'Jenis Transaksi',
             'file_address' => 'Upload File',
           //  'catatan' => 'Catatan',
-          //  'niplama' => 'Niplama',
+            'niplama' => 'Niplama',
           //  'id_publikasi' => 'Id Publikasi',
           //  'time_transaksi' => 'Time Transaksi',
         ];

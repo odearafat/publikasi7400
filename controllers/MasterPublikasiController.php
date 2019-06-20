@@ -14,6 +14,7 @@ use yii\helpers\Url;
 use yii\helpers\ArrayHelper;
 use yii\filters\AccessControl;
 
+
 /**
  * MasterPublikasiController implements the CRUD actions for MasterPublikasi model.
  */
@@ -37,18 +38,29 @@ class MasterPublikasiController extends Controller
                'rules'=>[
                    [
                        'actions'=>[
-                           'index',
-                           'create',
-                           'update',
-                           'delete',
-                           'view'
+                           'index','create',
+                           'update','delete',
+                           'view','histori'
                        ],
+                       'roles' => ['@'],
                        'allow'=>true,
+                       //'matchCallback' => function ($rule, $action) {
+                        //  return $this->redirect('index.php?r=site/login');
+                      //  }
                        'matchCallback'=>function(){
-                           return (
+                         /*if ( Yii::$app->user->isGuest ){
+                            return Yii::$app->getResponse()->redirect(array(Url::to(['site/login'],302)));
+                          }*/
+
+                          return (
                                Yii::$app->user->identity->role=='Admin'
+
+
                            );
-                       }
+                       },
+                       'denyCallback' => function ($rule, $action) {
+                              echo "sadasdsa";
+                            },
                    ],
                ],
            ],
@@ -94,14 +106,14 @@ class MasterPublikasiController extends Controller
 
     public function actionHistori($id)
     {
-        $model=MasterPublikasi::findOne($id);
-        $namaPegawai=MasterPegawai::findOne($model->id_penyusun);
+        //$model=MasterPublikasi::findOne($id);
+        //$namaPegawai=MasterPegawai::findOne($model->id_penyusun);
         //$namaPegawai=$model->nama;
         //$this->
 
         return $this->render('view-histori', [
-            'model' => $this->findModel($id),
-            'namaPegawai'=>$namaPegawai->nama
+            'model' => $this->findModel($id)
+            //,'namaPegawai'=>$namaPegawai->nama
        ]);
     }
 

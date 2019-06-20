@@ -7,7 +7,7 @@ use yii\helpers\Url;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Master Publikasi';
+$this->title = 'Publikasi ARC';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="master-publikasi-index">

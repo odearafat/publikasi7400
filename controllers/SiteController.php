@@ -24,12 +24,12 @@ class SiteController extends Controller
                 'rules' => [
                     [
                       'allow' => true,
-                      'actions' => ['login'],
+                      'actions' => ['login','signup'],
                       'roles' => ['?'],
                     ],
                     [
-                        'actions' => ['logout','index','contact'],
                         'allow' => true,
+                        'actions' => ['logout'],
                         'roles' => ['@'],
                     ],
                 ],
@@ -43,6 +43,8 @@ class SiteController extends Controller
         ];
     }
 
+    //Rules ['@'] dimaksudkan action tersebut hanya bisa diakses oleh semua user yang telah login.
+    //Rules ['?'] dimaksudkan semua user bisa mengakses action tersebut tanpa harus melakukan login terlebih dahulu.
     /**
      * {@inheritdoc}
      */
@@ -83,12 +85,14 @@ class SiteController extends Controller
     {
         if (!Yii::$app->user->isGuest) {
             //return $this->goHome();
-            return $this->goBack();
+            //return $this->goBack();
+             return $this->redirect('index.php?r=site/login');
         }
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
+            //return $this->goBack();
+            return $this->redirect('index.php?r=master-publikasi/index');
         }
 
         //$model->password = '';
@@ -105,8 +109,9 @@ class SiteController extends Controller
     public function actionLogout()
     {
         Yii::$app->user->logout();
-        return $this->goBack();
+        //return $this->goBack();
         //return $this->goHome();
+           return $this->redirect('index.php?r=site/login');
     }
 
     /**
