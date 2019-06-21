@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\MasterPublikasi */
@@ -14,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="master-publikasi-view">
 
     <h1><?php echo Html::encode($this->title) ?></h1>
-
+ <?php //print_r($transaksi);?>
     <p>
         <?php //echo  Html::a('Update', ['update', 'id' => $model->id_publikasi], ['class' => 'btn btn-primary']) ?>
         <?php //echo Html::a('Delete', ['delete', 'id' => $model->id_publikasi], [
@@ -27,16 +28,73 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
     <ul class="timeline">
             <!-- timeline time label -->
-            <li class="time-label">
-                  <span class="bg-blue">
-                    10 Feb. 2014
-                  </span>
-            </li>
+
+            <?php
+            $html="";
+
+            //print_r($transaksi);
+             foreach($transaksi as $key=>$item){
+               $html=$html.'<li class="time-label">
+                                <span class="bg-aqua">'
+                                    .$key.
+                                '</span>
+                            </li>';
+               foreach($item as $row){
+                //HTML tanggal
+
+                  //HTML untuk keterangan Jadwal Kegiatan
+                  if($row['jenis_trx']==0){
+                      $html=$html.'<li>
+                                      <i class="fa fa-calendar-check-o bg-red"></i>
+                                          <div class="timeline-item">
+                                          <h3 class="timeline-header no-border">'.$row['pegawai'].'</h3>
+                                      </div>
+                                    </li>';
+                  }elseif ($row['jenis_trx']==1) {
+                    // code...
+                    //$deleteLink=Url::to(['transaksi-publikasi/delete', 'id'=>$row['id_transaksi']]);
+                    //$editLink=Url::to(['transaksi-publikasi/edit', 'id'=>$row['id_transaksi']]);
+                    //$downloadLink=Url::to(['transaksi-publikasi/download', 'id'=>$row['id_transaksi']]);
+
+
+                    $html=$html.'<li>
+                      <i class="fa fa-cloud-upload bg-blue"></i>
+                      <div class="timeline-item">
+                        <span class="time"><i class="fa fa-clock-o"></i>'.$row['tanggal_real'].'</span>
+
+                        <h3 class="timeline-header"><a href="#">'.$row['pegawai'].'</a> Upload Berkas Publikasi</h3>
+                        <div class="timeline-body">'.$row['catatan'].'
+                        </div>
+                        <div class="timeline-footer">
+
+                          <a href="'.Url::toRoute(['transaksi-publikasi/download', 'id' => $row['id_transaksi']]).'" class="btn btn-success btn-sm">Download</a>
+                          <a href="'.Url::toRoute(['transaksi-publikasi/delete', 'id' => $row['id_transaksi']]).'" class="btn btn-danger btn-xs">Hapus</a>
+                          <a href="'.Url::toRoute(['transaksi-publikasi/update', 'id' => $row['id_transaksi']]).'" class="btn btn-warning btn-xs">Edit</a>
+                        </div>
+                      </div>
+                    </li>';
+                  }
+                  else{
+                    $html=$html.'<li>
+                                    <i class="fa fa-cloud-download bg-yellow"></i>
+                                        <div class="timeline-item">
+                                        <h3 class="timeline-header no-border">'.$row['pegawai'].' Download File</h3>
+                                    </div>
+                                  </li>';
+                  }
+                }
+
+
+
+            };
+            echo $html;
+            ?>
+
             <!-- /.timeline-label -->
             <!-- timeline item -->
+            <!--
             <li>
               <i class="fa fa-cloud-upload bg-blue"></i>
-
               <div class="timeline-item">
                 <span class="time"><i class="fa fa-clock-o"></i> 12:05</span>
 
@@ -56,6 +114,7 @@ $this->params['breadcrumbs'][] = $this->title;
             </li>
             <!-- END timeline item -->
             <!-- timeline item -->
+            <!--
             <li class="time-label">
                   <span class="bg-red">
                     10 Feb. 2014

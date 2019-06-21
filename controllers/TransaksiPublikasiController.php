@@ -95,10 +95,14 @@ class TransaksiPublikasiController extends Controller
                $searchModel = new TransaksiSearch();
                $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-               return $this->render('index', [
+               /*return $this->render('index', [
                    'searchModel' => $searchModel,
                    'dataProvider' => $dataProvider,
-                 ]);
+                 ]);*/
+
+                  return $this->redirect('index.php?r=master-publikasi/histori&id='.$id);
+
+
               /*}else{
                 echo 'gagal';
                 $searchModel = new TransaksiSearch();
@@ -120,6 +124,7 @@ class TransaksiPublikasiController extends Controller
             return $this->render('create', [
                'model' => $model,
            ]);
+
         }
 
 

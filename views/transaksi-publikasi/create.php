@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\TransaksiPublikasi */
 
-$this->title = 'Create Transaksi Publikasi';
+$this->title = 'Upload Berkas Publikasi';
 $this->params['breadcrumbs'][] = ['label' => 'Transaksi Publikasis', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

@@ -23,14 +23,7 @@ use yii\helpers\ArrayHelper;
 
     <?= $form->field($model, 'nama_publikasi')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'tgl_upload')->widget(DatePicker::classname(), [
-          'options' => ['placeholder' => 'Tanggal Upload....'],
-          'pluginOptions' => [
-              'autoclose'=>true,
-              'format' => 'yyyy-mm-dd'
-          ]
-        ]);
-    ?>
+
 
     <?= $form->field($model, 'tgl_periksa_bidang')->widget(DatePicker::classname(), [
         'options' => ['placeholder' => 'Tanggal Upload ...'],
@@ -49,7 +42,14 @@ use yii\helpers\ArrayHelper;
         ]
         ]);
     ?>
-
+    <?= $form->field($model, 'tgl_upload')->widget(DatePicker::classname(), [
+          'options' => ['placeholder' => 'Tanggal Upload....'],
+          'pluginOptions' => [
+              'autoclose'=>true,
+              'format' => 'yyyy-mm-dd'
+          ]
+        ]);
+    ?>
     <?= $form->field($model, 'tgl_rilis')->widget(DatePicker::classname(), [
         'options' => ['placeholder' => 'Tanggal Rilis Pubikasi ...'],
         'pluginOptions' => [
