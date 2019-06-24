@@ -1,5 +1,6 @@
 <?php
 use yii\helpers\Html;
+use app\models\MasterPegawai;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
@@ -33,7 +34,7 @@ use yii\helpers\Html;
                                 <li><!-- start message -->
                                     <a href="#">
                                         <div class="pull-left">
-                                            <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="img-circle"
+                                            <img src="<?= Yii::getAlias('@web').'/img/foto/'.Yii::$app->user->id.".jpg" ?>/img/user2-160x160.jpg" class="img-circle"
                                                  alt="User Image"/>
                                         </div>
                                         <h4>
@@ -229,8 +230,11 @@ use yii\helpers\Html;
 
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="user-image" alt="User Image"/>
-                        <span class="hidden-xs">Alexander Pierce</span>
+                        <img src="<?=Yii::getAlias('@web').'/img/foto/'.Yii::$app->user->id.".jpg"?>" class="user-image" alt="User Image"/>
+                        <span class="hidden-xs">
+                          <?php
+                              $namaPegawai=MasterPegawai::findOne(Yii::$app->user->id);
+                              echo $namaPegawai->nama ?></span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- User image -->

@@ -5,7 +5,7 @@ $db = require __DIR__ . '/db.php';
 
 $config = [
     'id' => 'basic',
-    'name'=>'Publikasi74',
+    'name'=>'<b>Manajemen</b>Publikasi',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'aliases' => [
@@ -72,7 +72,7 @@ $config = [
     ],
     'params' => $params,
     'defaultRoute' => 'site/login',
-    
+
 ];
 
 if (YII_ENV_DEV) {
