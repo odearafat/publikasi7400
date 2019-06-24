@@ -43,7 +43,7 @@ class TransaksiPublikasi extends \yii\db\ActiveRecord
             //[['id_publikasi'], 'exist', 'skipOnError' => true, 'targetClass' => MasterPublikasi::className(), 'targetAttribute' => ['id_publikasi' => 'id_publikasi']],
 
             //Tambahan
-            [['file_address'], 'file', 'skipOnEmpty' => true, 'extensions' => 'zip, rar'],
+            [['file_address'], 'file', 'skipOnEmpty' => !$this->isNewRecord, 'extensions' => 'zip, rar'],
         ];
     }
 

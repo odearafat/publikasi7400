@@ -35,7 +35,10 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
      */
     public static function findIdentity($id)
     {
-        $user = Login::findOne($id);
+        $user = Login::find()
+                ->where(['id'=>$id])
+                ->asArray()
+                ->one();
         if(count($user)){
             return new static($user);
         }
@@ -64,7 +67,10 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
     public static function findByUsername($username)
     {
       //mencari user login berdasarkan username dan hanya dicari 1.
-      $user = Login::find()->where(['username'=>$username])->one();
+      $user = Login::find()
+                    ->where(['username'=>$username])
+                    ->asArray()
+                    ->one();
       if(count($user)){
           return new static($user);
       }

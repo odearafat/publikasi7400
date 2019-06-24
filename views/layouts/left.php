@@ -1,3 +1,7 @@
+<?php
+  use app\models\MasterPegawai;
+ ?>
+
 <aside class="main-sidebar">
 
     <section class="sidebar">
@@ -8,7 +12,11 @@
                 <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="img-circle" alt="User Image"/>
             </div>
             <div class="pull-left info">
-                <p></p>
+                <p><?php
+                      $namaPegawai=MasterPegawai::findOne(Yii::$app->user->id);
+                      echo $namaPegawai->nama;
+                    ?>
+                  </p>
 
                 <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
@@ -36,16 +44,17 @@
                     //['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
                     ['label' => 'PUBLIKASI', 'icon' => 'dashboard', 'url' => ['/master-publikasi/index'],
                       'items' => [
-                          ['label' => 'Publikasi ARC', 'icon' => ' fa-calendar-check-o', 'url' => ['/master-publikasi/index'],],
-                          ['label' => 'Publikasi NON ARC', 'icon' => ' fa-book', 'url' => ['#'],],
-                          ['label' => 'Status Publikasi', 'icon' => ' fa-question', 'url' => ['#'],],
+                          ['label' => ' Publikasi ARC', 'icon' => ' fa-calendar-check-o ', 'url' => ['/master-publikasi/index'],],
+                          ['label' => ' Publikasi NON ARC', 'icon' => ' fa-book', 'url' => ['/master-publikasi-non-a-r-c/index'],],
+                          ['label' => ' Status Publikasi', 'icon' => ' fa-question', 'url' => ['/master-publikasi/index'],],
                       ]
                     ],
 
                     ['label' => 'ADMINISTRASI', 'icon' => 'dashboard', 'url' => ['/debug'],
                       'items' => [
-                          ['label' => 'Publikasi Siap Cetak', 'icon' => 'file-code-o', 'url' => ['/gii'],],
-                          ['label' => 'Distribusi Publikasi', 'icon' => 'dashboard', 'url' => ['/debug'],],
+                          ['label' => 'Publikasi Siap Cetak', 'icon' => 'file-code-o', 'url' => ['/master-publikasi/index'],],
+                          ['label' => 'Distribusi Publikasi', 'icon' => 'dashboard', 'url' => ['/master-publikasi/index'],],
+                          ['label' => 'Master Instansi', 'icon' => 'dashboard', 'url' => ['/master-instansi-distribusi/index'],],
                       ]
                   ],
                     /*[

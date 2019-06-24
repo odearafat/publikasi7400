@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 use yii\helpers\Url;
+use yii\widgets\LinkPager;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\MasterPublikasi */
@@ -18,7 +19,10 @@ $this->params['breadcrumbs'][] = $this->title;
  <?php //print_r($transaksi);?>
     <p>
         <?php //echo  Html::a('Update', ['update', 'id' => $model->id_publikasi], ['class' => 'btn btn-primary']) ?>
-        <?php //echo Html::a('Delete', ['delete', 'id' => $model->id_publikasi], [
+        <?php
+
+
+         //echo Html::a('Delete', ['delete', 'id' => $model->id_publikasi], [
             //'class' => 'btn btn-danger',
             //'data' => [
             //    'confirm' => 'Are you sure you want to delete this item?',
@@ -46,29 +50,28 @@ $this->params['breadcrumbs'][] = $this->title;
                   if($row['jenis_trx']==0){
                       $html=$html.'<li>
                                       <i class="fa fa-calendar-check-o bg-red"></i>
-                                          <div class="timeline-item">
+                                          <div  class="timeline-item">
+                                          <span  class="time"><i class="fa fa-clock-o "></i>'.date(" <b>  j F Y </b> ", strtotime($row['tanggal_real'])).'</span>
                                           <h3 class="timeline-header no-border">'.$row['pegawai'].'</h3>
                                       </div>
                                     </li>';
                   }elseif ($row['jenis_trx']==1) {
                     // code...
-                    //$deleteLink=Url::to(['transaksi-publikasi/delete', 'id'=>$row['id_transaksi']]);
-                    //$editLink=Url::to(['transaksi-publikasi/edit', 'id'=>$row['id_transaksi']]);
-                    //$downloadLink=Url::to(['transaksi-publikasi/download', 'id'=>$row['id_transaksi']]);
-
 
                     $html=$html.'<li>
                       <i class="fa fa-cloud-upload bg-blue"></i>
                       <div class="timeline-item">
-                        <span class="time"><i class="fa fa-clock-o"></i>'.$row['tanggal_real'].'</span>
+                        <span class="time"><i class="fa fa-clock-o"></i>'.date("<b> d F Y </b> H:i", strtotime($row['tanggal_real'])).'</span>
 
                         <h3 class="timeline-header"><a href="#">'.$row['pegawai'].'</a> Upload Berkas Publikasi</h3>
                         <div class="timeline-body">'.$row['catatan'].'
                         </div>
                         <div class="timeline-footer">
 
-                          <a href="'.Url::toRoute(['transaksi-publikasi/download', 'id' => $row['id_transaksi']]).'" class="btn btn-success btn-sm">Download</a>
-                          <a href="'.Url::toRoute(['transaksi-publikasi/delete', 'id' => $row['id_transaksi']]).'" class="btn btn-danger btn-xs">Hapus</a>
+                          <a href="'.Url::toRoute(['transaksi-publikasi/download', 'id' => $row['id_transaksi']]).'" class="btn btn-success btn-sm">Download</a>'.
+
+                          '<a style="margin :0.2%" data-confirm = "Are you sure you want to delete this item?"  data-method="post"
+                           href="'.Url::toRoute(['transaksi-publikasi/delete', 'id' => $row['id_transaksi']]).'" class="btn btn-danger btn-xs"> Hapus </a>
                           <a href="'.Url::toRoute(['transaksi-publikasi/update', 'id' => $row['id_transaksi']]).'" class="btn btn-warning btn-xs">Edit</a>
                         </div>
                       </div>

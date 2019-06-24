@@ -9,6 +9,7 @@ use yii\web\Controller;
 use yii\web\UploadedFile;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\Url;
 
 /**
  * TransaksiPublikasiController implements the CRUD actions for TransaksiPublikasi model.
@@ -75,12 +76,11 @@ class TransaksiPublikasiController extends Controller
         if ($model->load(Yii::$app->request->post())) {
         //if (Yii::$app->request->isPost) {
         //if ($model->load(Yii::$app->request->post()) && $model->save()){
-
           //echo 'dsada'; exit();
            $file_address = UploadedFile::getInstance($model, 'file_address');
            //if($model->validate()){
              //echo 'test'; exit();
-               $model->save();
+               //$model->save();
                 if (!empty($file_address)) {
                     $file_address->saveAs(Yii::getAlias('@app/img/') . 'gambar'. date('YmdHis').'.'. $file_address->extension);
                     $model->file_address = 'gambar'. date('YmdHis').'.'. $file_address->extension;
@@ -88,10 +88,11 @@ class TransaksiPublikasiController extends Controller
                     $model->jenis_transaksi=1;
                     $model->niplama=Yii::$app->user->identity->id;;
                     $model->save(FALSE);
+                    return $this->redirect('index.php?r=master-publikasi/histori&id='.$id);
                }
 
 
-               $model->save();
+               /*$model->save();
                $searchModel = new TransaksiSearch();
                $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -100,7 +101,7 @@ class TransaksiPublikasiController extends Controller
                    'dataProvider' => $dataProvider,
                  ]);*/
 
-                  return $this->redirect('index.php?r=master-publikasi/histori&id='.$id);
+
 
 
               /*}else{
@@ -112,15 +113,9 @@ class TransaksiPublikasiController extends Controller
                     'dataProvider' => $dataProvider,
                   ]);
               }*/
+
+            //Jika Buka Transkasi Post
           } else {
-            /*$model->file_address = UploadedFile::getInstance($model, 'file_address');
-            if ($model->upload()) {
-
-                // file is uploaded successfully
-                return;
-            }
-            */
-
             return $this->render('create', [
                'model' => $model,
            ]);
@@ -165,9 +160,20 @@ class TransaksiPublikasiController extends Controller
      */
     public function actionDelete($id)
     {
+        $model=TransaksiPublikasi::findOne($id);
+
         $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect('index.php?r=master-publikasi/histori&id='.$model->id_publikasi);
+        //return $this->redirect(['index']);
+    }
+
+
+    //Fungsi Diownload File
+    public function actionDownload($id)
+    {
+        $transaksi=TransaksiPublikasi::findOne($id);
+        return \Yii::$app->response->sendFile(Yii::getAlias('@app/img/').$transaksi->file_address);
     }
 
     /**

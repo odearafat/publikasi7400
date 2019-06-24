@@ -72,6 +72,7 @@ $config = [
     ],
     'params' => $params,
     'defaultRoute' => 'site/login',
+    
 ];
 
 if (YII_ENV_DEV) {

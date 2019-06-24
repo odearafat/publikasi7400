@@ -41,6 +41,7 @@ class SiteController extends Controller
                 ],
             ],
         ];
+        
     }
 
     //Rules ['@'] dimaksudkan action tersebut hanya bisa diakses oleh semua user yang telah login.
